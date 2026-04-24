@@ -1,0 +1,25 @@
+name: ML Model CI
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+
+jobs:
+  validate-and-test:
+    runs-on: ubtunu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: set up python
+        uses: actions/setup-python@v5
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: linter
+        run: echo "linter done"
+      - name: Upload README artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name:project-doc
+          path:README.md
